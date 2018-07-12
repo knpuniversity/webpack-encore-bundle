@@ -1,0 +1,13 @@
+{
+    "name": "knpuniversity/webpack-encore-bundle",
+    "description": "Integration with your Symfony app & Webpack Encore!",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Weaver",
+            "email": "ryan@knpuniversity.com"
+        }
+    ],
+    "require": {}
+}
