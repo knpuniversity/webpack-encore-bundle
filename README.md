@@ -35,7 +35,7 @@ First, enable the "Split Chunks" functionality in Webpack Encore:
 
     .addEntry('entry1', './assets/some_file.js')
 
-+    .splitEntryChunks()
++   .splitEntryChunks()
 // ...
 ```
 
@@ -71,3 +71,6 @@ example, the output path is `public/build`. So, because the final public
 path to the assets would be, for example, `build/entry1.js`, the "prefix"
 is the `build/` part.
 
+Or, if you want more control, you can use the `getWebpackJsFiles()` and
+`getWebpackCssFiles()` methods to get the list of files needed, then
+loop and create the `script` and `link` tags manually.

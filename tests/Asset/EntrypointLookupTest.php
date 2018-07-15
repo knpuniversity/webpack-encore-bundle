@@ -87,4 +87,13 @@ EOF;
     {
         $this->entrypointLookup->getCssFiles('fake_entry');
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Try "my_entry" instead
+     */
+    public function testExceptionOnEntryWithExtension()
+    {
+        $this->entrypointLookup->getJavaScriptFiles('my_entry.js');
+    }
 }

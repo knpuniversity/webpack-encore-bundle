@@ -63,7 +63,13 @@ class EntrypointLookup
     {
         $entriesData = $this->getEntriesData();
         if (!isset($entriesData[$entryName])) {
-            throw new \InvalidArgumentException(sprintf('Could not find the entry "%s" in "%s". Found: %s', $entryName, $this->entrypointJsonPath, implode(', ', array_keys($entriesData))));
+            $withoutExtension = substr($entryName, 0, strrpos($entryName, '.'));
+
+            if (isset($entriesData[$withoutExtension])) {
+                throw new \InvalidArgumentException(sprintf('Could not find the entry "%s". Try "%s" instead (without the extension).', $entryName, $withoutExtension));
+            }
+
+            throw new \InvalidArgumentException(sprintf('Could not find the entry "%s" in "%s". Found: %s.', $entryName, $this->entrypointJsonPath, implode(', ', array_keys($entriesData))));
         }
     }
 
