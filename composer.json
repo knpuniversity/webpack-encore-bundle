@@ -9,5 +9,26 @@
             "email": "ryan@knpuniversity.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "KnpUniversity\\WebpackEncoreBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KnpUniversity\\WebpackEncoreBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "symfony/http-kernel": "^3.4 || ^4.0",
+        "symfony/dependency-injection": "^3.4 || ^4.0",
+        "symfony/config": "^3.4 || ^4.0"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^3.4 || ^4.0",
+        "twig/twig": "^1.35 || ^2.0",
+        "symfony/framework-bundle": "^3.4 || ^4.0",
+        "symfony/twig-bundle": "^3.4 || ^4.0",
+        "symfony/asset": "^4.1"
+    }
 }
