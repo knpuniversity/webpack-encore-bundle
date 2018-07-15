@@ -30,6 +30,6 @@
         "twig/twig": "^1.35 || ^2.0",
         "symfony/framework-bundle": "^3.4 || ^4.0",
         "symfony/twig-bundle": "^3.4 || ^4.0",
-        "symfony/asset": "^4.1"
+        "symfony/asset": "^3.4 || ^4.0"
     }
 }
