@@ -19,10 +19,10 @@ class EntryFilesTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('getWebpackJsFiles', [$this, 'getWebpackJsFiles']),
-            new \Twig_SimpleFunction('getWebpackCssFiles', [$this, 'getWebpackCssFiles']),
-            new \Twig_SimpleFunction('renderWebpackScriptTags', [$this, 'renderWebpackScriptTags'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('renderWebpackLinkTags', [$this, 'renderWebpackLinkTags'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('get_webpack_js_files', [$this, 'getWebpackJsFiles']),
+            new \Twig_SimpleFunction('get_webpack_css_files', [$this, 'getWebpackCssFiles']),
+            new \Twig_SimpleFunction('render_webpack_script_tags', [$this, 'renderWebpackScriptTags'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('render_webpack_link_tags', [$this, 'renderWebpackLinkTags'], ['is_safe' => ['html']]),
         ];
     }
 

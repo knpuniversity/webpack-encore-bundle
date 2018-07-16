@@ -56,13 +56,13 @@ For example, to render all of the `script` and `link` tags for a specific
 {% block javascripts %}
     {{ parent() }}
 
-    {{ renderWebpackScriptTags('entry1', 'build/') }}
+    {{ render_webpack_script_tags('entry1', 'build/') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {{ renderWebpackLinkTags('entry1', 'build/') }}
+    {{ render_webpack_link_tags('entry1', 'build/') }}
 {% endblock %}
 ```
 
@@ -71,6 +71,6 @@ example, the output path is `public/build`. So, because the final public
 path to the assets would be, for example, `build/entry1.js`, the "prefix"
 is the `build/` part.
 
-Or, if you want more control, you can use the `getWebpackJsFiles()` and
-`getWebpackCssFiles()` methods to get the list of files needed, then
+Or, if you want more control, you can use the `get_webpac_js_files()` and
+`get_webpack_css_files()` methods to get the list of files needed, then
 loop and create the `script` and `link` tags manually.
