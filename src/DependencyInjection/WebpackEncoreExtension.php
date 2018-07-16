@@ -21,6 +21,7 @@ class WebpackEncoreExtension extends Extension
             ->replaceArgument(0, $config['output_path'].'/entrypoints.json');
 
         $container->getDefinition('webpack_encore.tag_renderer')
-            ->replaceArgument(1, $config['asset_path_prefix']);
+            ->replaceArgument(1, $config['asset_path_prefix'])
+            ->replaceArgument(2, $config['output_path'].'/manifest.json');
     }
 }
