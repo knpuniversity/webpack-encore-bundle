@@ -3,6 +3,7 @@
 namespace KnpUniversity\WebpackEncoreBundle\Twig;
 
 use KnpUniversity\WebpackEncoreBundle\Asset\EntrypointLookup;
+use KnpUniversity\WebpackEncoreBundle\Asset\TagRenderer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
@@ -38,30 +39,16 @@ class EntryFilesTwigExtension extends AbstractExtension
             ->getCssFiles($entryName);
     }
 
-    public function renderWebpackScriptTags($entryName, $pathPrefix, $packageName = null)
+    public function renderWebpackScriptTags($entryName, $packageName = null)
     {
-        $scriptTags = [];
-        foreach ($this->getWebpackJsFiles($entryName) as $filename) {
-            $scriptTags[] = sprintf(
-                '<script src="%s"></script>',
-                $this->getAssetPath($pathPrefix, $filename, $packageName)
-            );
-        }
-
-        return implode('', $scriptTags);
+        return $this->getTagRenderer()
+            ->renderWebpackScriptTags($entryName, $packageName);
     }
 
-    public function renderWebpackLinkTags($entryName, $pathPrefix, $packageName = null)
+    public function renderWebpackLinkTags($entryName, $packageName = null)
     {
-        $scriptTags = [];
-        foreach ($this->getWebpackCssFiles($entryName) as $filename) {
-            $scriptTags[] = sprintf(
-                '<link rel="stylesheet" src="%s"></link>',
-                $this->getAssetPath($pathPrefix, $filename, $packageName)
-            );
-        }
-
-        return implode('', $scriptTags);
+        return $this->getTagRenderer()
+            ->renderWebpackLinkTags($entryName, $packageName);
     }
 
     private function getAssetPath($pathPrefix, $filename, $packageName = null)
@@ -80,15 +67,10 @@ class EntryFilesTwigExtension extends AbstractExtension
     }
 
     /**
-     * @return Packages
-     * @throws \Exception
+     * @return TagRenderer
      */
-    private function getAssetPackages()
+    private function getTagRenderer()
     {
-        if (!$this->container->has('assets.packages')) {
-            throw new \Exception('To render the script or link tags, run "composer require symfony/asset".');
-        }
-
-        return $this->container->get('assets.packages');
+        return $this->container->get('webpack_encore.tag_renderer');
     }
 }

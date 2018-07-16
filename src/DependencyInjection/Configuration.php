@@ -16,9 +16,13 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('entrypoints_json_path')
+                ->scalarNode('output_path')
                     ->isRequired()
-                    ->info('The path to the entrypoints.json emitted by Webpack Encore')
+                    ->info('The path where Encore is building the assets - i.e. Encore.setOutputPath()')
+                ->end()
+                ->scalarNode('asset_path_prefix')
+                    ->isRequired()
+                    ->info('The public prefix to your assets that you normally use with the asset() function (e.g. build/) - should match the "setManifestKeyPrefix()" value in webpack.config.js, if set.')
                 ->end()
             ->end()
         ;

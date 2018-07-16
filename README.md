@@ -20,7 +20,12 @@ file:
 ```yaml
 # config/packages/webpack_encore.yaml
 webpack_encore:
-    entrypoints_json_path: '%kernel.public_dir%/build/entrypoints.json'
+    # The path where Encore is building the assets - i.e. Encore.setOutputPath()
+    output_path: '%kernel.public_dir%/build'
+
+    # The public prefix to your assets that you normally use with the asset() function (e.g. build/) -
+    # should match the "setManifestKeyPrefix()" value in webpack.config.js, if set.
+    asset_path_prefix: 'build/'
 ```
 
 ## Usage
@@ -32,6 +37,7 @@ First, enable the "Split Chunks" functionality in Webpack Encore:
 // ...
     .setOutputPath('public/build/')
     .setPublicPath('/build')
+    .setManifestKeyPrefix('build/')
 
     .addEntry('entry1', './assets/some_file.js')
 
@@ -56,21 +62,26 @@ For example, to render all of the `script` and `link` tags for a specific
 {% block javascripts %}
     {{ parent() }}
 
-    {{ render_webpack_script_tags('entry1', 'build/') }}
+    {{ render_webpack_script_tags('entry1') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {{ render_webpack_link_tags('entry1', 'build/') }}
+    {{ render_webpack_link_tags('entry1') }}
 {% endblock %}
 ```
 
-The `build/` is the public path "prefix" that each asset needs. In the above
-example, the output path is `public/build`. So, because the final public
-path to the assets would be, for example, `build/entry1.js`, the "prefix"
-is the `build/` part.
+Assuming that `entry1` required two files to be included - `vendor~entry1~entry2.js`
+and `entry1.js`, then `render_webpack_script_tags()` is equivalent to:
 
-Or, if you want more control, you can use the `get_webpac_js_files()` and
+```twig
+<script src="{{ asset('build/vendor~entry1~entry2.js') }}"></script>
+<script src="{{ asset('build/entry1.js') }}"></script>
+```
+
+The `build/` public prefix to your assets is set in the config file.
+
+If you want more control, you can use the `get_webpack_js_files()` and
 `get_webpack_css_files()` methods to get the list of files needed, then
 loop and create the `script` and `link` tags manually.

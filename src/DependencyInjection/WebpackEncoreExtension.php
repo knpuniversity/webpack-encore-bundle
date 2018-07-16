@@ -17,7 +17,10 @@ class WebpackEncoreExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definiton = $container->getDefinition('webpack_encore.entrypoint_lookup');
-        $definiton->replaceArgument(0, $config['entrypoints_json_path']);
+        $container->getDefinition('webpack_encore.entrypoint_lookup')
+            ->replaceArgument(0, $config['output_path'].'/entrypoints.json');
+
+        $container->getDefinition('webpack_encore.tag_renderer')
+            ->replaceArgument(1, $config['asset_path_prefix']);
     }
 }

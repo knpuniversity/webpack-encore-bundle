@@ -11,6 +11,12 @@
             <argument /> <!-- entrypoints.json path -->
         </service>
 
+        <service id="webpack_encore.tag_renderer" class="KnpUniversity\WebpackEncoreBundle\Asset\TagRenderer">
+            <argument type="service" id="webpack_encore.entrypoint_lookup" />
+            <argument /> <!-- assets prefix path -->
+            <argument type="service" id="assets.packages" on-invalid="null" />
+        </service>
+
         <service id="webpack_encore.twig_entry_files_extension" class="KnpUniversity\WebpackEncoreBundle\Twig\EntryFilesTwigExtension">
             <tag name="twig.extension" />
             <argument type="service">
@@ -18,7 +24,7 @@
                     <tag name="container.service_locator" />
                     <argument type="collection">
                         <argument key="webpack_encore.entrypoint_lookup" type="service" id="webpack_encore.entrypoint_lookup" />
-                        <argument key="assets.packages" type="service" id="assets.packages" on-invalid="ignore" />
+                        <argument key="webpack_encore.tag_renderer" type="service" id="webpack_encore.tag_renderer" />
                     </argument>
                 </service>
             </argument>
