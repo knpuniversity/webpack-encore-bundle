@@ -65,18 +65,18 @@ For example, to render all of the `script` and `link` tags for a specific
 {% block javascripts %}
     {{ parent() }}
 
-    {{ render_webpack_script_tags('entry1') }}
+    {{ encore_entry_script_tags('entry1') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {{ render_webpack_link_tags('entry1') }}
+    {{ encore_entry_link_tags('entry1') }}
 {% endblock %}
 ```
 
 Assuming that `entry1` required two files to be included - `vendor~entry1~entry2.js`
-and `entry1.js`, then `render_webpack_script_tags()` is equivalent to:
+and `entry1.js`, then `encore_entry_script_tags()` is equivalent to:
 
 ```twig
 <script src="{{ asset('build/vendor~entry1~entry2.js') }}"></script>
@@ -85,6 +85,6 @@ and `entry1.js`, then `render_webpack_script_tags()` is equivalent to:
 
 The `build/` public prefix to your assets is set in the config file.
 
-If you want more control, you can use the `get_webpack_js_files()` and
-`get_webpack_css_files()` methods to get the list of files needed, then
+If you want more control, you can use the `encore_entry_js_files()` and
+`encore_entry_css_files()` methods to get the list of files needed, then
 loop and create the `script` and `link` tags manually.
