@@ -20,10 +20,6 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->info('The path where Encore is building the assets - i.e. Encore.setOutputPath()')
                 ->end()
-                ->scalarNode('asset_path_prefix')
-                    ->isRequired()
-                    ->info('The public prefix to your assets that you normally use with the asset() function (e.g. build/) - should match the "setManifestKeyPrefix()" value in webpack.config.js, if set.')
-                ->end()
             ->end()
         ;
 

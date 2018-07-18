@@ -19,10 +19,9 @@ class TagRenderer
 
     private $manifestData;
 
-    public function __construct(EntrypointLookup $entrypointLookup, $assetPrefix, $manifestPath, Packages $packages = null)
+    public function __construct(EntrypointLookup $entrypointLookup, $manifestPath, Packages $packages = null)
     {
         $this->entrypointLookup = $entrypointLookup;
-        $this->assetPrefix = rtrim($assetPrefix, '/');
         $this->manifestPath = $manifestPath;
         $this->packages = $packages;
     }
@@ -53,7 +52,7 @@ class TagRenderer
         return implode('', $scriptTags);
     }
 
-    private function getAssetPath($filename, $packageName = null)
+    private function getAssetPath($assetPath, $packageName = null)
     {
         if (null === $this->packages) {
             throw new \Exception('To render the script or link tags, run "composer require symfony/asset".');
@@ -62,8 +61,6 @@ class TagRenderer
         if (null === $this->jsonManifestVersionStrategy) {
             $this->jsonManifestVersionStrategy = new JsonManifestVersionStrategy($this->manifestPath);
         }
-
-        $assetPath = $this->assetPrefix.'/'.$filename;
 
         // to help avoid issues, use the manifest.json path always
         $newAssetPath = $this->jsonManifestVersionStrategy
@@ -77,7 +74,7 @@ class TagRenderer
             $manifestData = $this->getManifestData();
 
             if (!isset($manifestData[$assetPath])) {
-                throw new \InvalidArgumentException(sprintf('The path "%s" could not be found in the Encore "manifest.json" file. Check your "asset_path_prefix" configuration to make sure it\'s consistent with the keys in that JSON file.', $assetPath));
+                throw new \InvalidArgumentException(sprintf('The path "%s" could not be found in the Encore "manifest.json" file. This could be a problem with the dumped entrypoints.json file.', $assetPath));
             }
         }
 

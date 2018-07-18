@@ -76,7 +76,6 @@ class WebpackEncoreIntegrationTestKernel extends Kernel
 
             $container->loadFromExtension('webpack_encore', [
                 'output_path' => __DIR__.'/fixtures/build',
-                'asset_path_prefix' => 'build/',
             ]);
         });
     }
