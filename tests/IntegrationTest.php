@@ -17,11 +17,22 @@ class IntegrationTest extends TestCase
         $kernel = new WebpackEncoreIntegrationTestKernel(true);
         $kernel->boot();
         $container = $kernel->getContainer();
-        $html = $container->get('twig')->render('@integration_test/template.twig');
 
+        $html2 = $container->get('twig')->render('@integration_test/template.twig');
         $this->assertContains(
             '<script src="/build/file1.js"></script>',
-            $html
+            $html2
+        );
+
+        $html2 = $container->get('twig')->render('@integration_test/manual_template.twig');
+        $this->assertContains(
+            '<script src="/build/file3.js"></script>',
+            $html2
+        );
+        // file1.js is not repeated
+        $this->assertNotContains(
+            '<script src="/build/file1.js"></script>',
+            $html2
         );
     }
 

@@ -3,6 +3,7 @@
 namespace KnpUniversity\WebpackEncoreBundle\Twig;
 
 use KnpUniversity\WebpackEncoreBundle\Asset\EntrypointLookup;
+use KnpUniversity\WebpackEncoreBundle\Asset\ManifestLookup;
 use KnpUniversity\WebpackEncoreBundle\Asset\TagRenderer;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Asset\Packages;
@@ -29,14 +30,22 @@ class EntryFilesTwigExtension extends AbstractExtension
 
     public function getWebpackJsFiles($entryName)
     {
-        return $this->getEntrypointLookup()
+        $jsFiles = $this->getEntrypointLookup()
             ->getJavaScriptFiles($entryName);
+
+        return array_map(function($path) {
+            return $this->getManifestLookup()->getManifestPath($path);
+        }, $jsFiles);
     }
 
     public function getWebpackCssFiles($entryName)
     {
-        return $this->getEntrypointLookup()
+        $cssFiles = $this->getEntrypointLookup()
             ->getCssFiles($entryName);
+
+        return array_map(function($path) {
+            return $this->getManifestLookup()->getManifestPath($path);
+        }, $cssFiles);
     }
 
     public function renderWebpackScriptTags($entryName, $packageName = null)
@@ -57,6 +66,14 @@ class EntryFilesTwigExtension extends AbstractExtension
     private function getEntrypointLookup()
     {
         return $this->container->get('webpack_encore.entrypoint_lookup');
+    }
+
+    /**
+     * @return ManifestLookup
+     */
+    private function getManifestLookup()
+    {
+        return $this->container->get('webpack_encore.manifest_lookup');
     }
 
     /**
