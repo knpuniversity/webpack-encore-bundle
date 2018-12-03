@@ -31,8 +31,5 @@
         "symfony/framework-bundle": "^3.4 || ^4.0",
         "symfony/twig-bundle": "^3.4 || ^4.0",
         "symfony/asset": "^3.4 || ^4.0"
-    },
-    "suggest": {
-        "symfony/webpack-encore-bundle": "This bundle has been moved to a new package name: symfony/webpack-encore-bundle - use it instead."
     }
 }
