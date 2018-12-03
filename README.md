@@ -1,7 +1,8 @@
 # WebpackEncoreBundle: Symfony integration with Webpack Encore!
 
-**EXPERIMENTAL** This bundle is currently experimental and under
-development. So, don't use it ;).
+**WARNING** This bundle **IS NOT MAINTAINED** anymore, use
+[symfony/webpack-encore-bundle](https://github.com/symfony/webpack-encore-bundle)
+instead!!!
 
 This bundle allows you to use the `splitEntryChunks()` feature
 from [Webpack Encore](https://symfony.com/doc/current/frontend.html)
